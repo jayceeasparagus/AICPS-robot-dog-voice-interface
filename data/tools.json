@@ -1,0 +1,26 @@
+[
+  {
+    "token": "{go2_stop}",
+    "command": "echo GO2_ACTION_STOP"
+  },
+  {
+    "token": "{go2_stand}",
+    "command": "echo GO2_ACTION_STAND"
+  },
+  {
+    "token": "{go2_sit}",
+    "command": "echo GO2_ACTION_SIT"
+  },
+  {
+    "token": "{go2_walk_forward}",
+    "command": "echo GO2_ACTION_WALK_FORWARD"
+  },
+  {
+    "token": "{go2_turn_left}",
+    "command": "echo GO2_ACTION_TURN_LEFT"
+  },
+  {
+    "token": "{go2_turn_right}",
+    "command": "echo GO2_ACTION_TURN_RIGHT"
+  }
+]

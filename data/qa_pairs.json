@@ -1,0 +1,99 @@
+[
+  {
+    "question": "stop",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "freeze",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "halt",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "stop moving",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "do not move",
+    "answer": "{go2_stop}"
+  },
+
+  {
+    "question": "stand",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "stand up",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "get up",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "balance stand",
+    "answer": "{go2_stand}"
+  },
+
+  {
+    "question": "sit",
+    "answer": "{go2_sit}"
+  },
+  {
+    "question": "sit down",
+    "answer": "{go2_sit}"
+  },
+  {
+    "question": "take a seat",
+    "answer": "{go2_sit}"
+  },
+
+  {
+    "question": "walk forward",
+    "answer": "{go2_walk_forward}"
+  },
+  {
+    "question": "go forward",
+    "answer": "{go2_walk_forward}"
+  },
+  {
+    "question": "move forward",
+    "answer": "{go2_walk_forward}"
+  },
+  {
+    "question": "go straight",
+    "answer": "{go2_walk_forward}"
+  },
+  {
+    "question": "move ahead",
+    "answer": "{go2_walk_forward}"
+  },
+
+  {
+    "question": "turn left",
+    "answer": "{go2_turn_left}"
+  },
+  {
+    "question": "rotate left",
+    "answer": "{go2_turn_left}"
+  },
+  {
+    "question": "look left",
+    "answer": "{go2_turn_left}"
+  },
+
+  {
+    "question": "turn right",
+    "answer": "{go2_turn_right}"
+  },
+  {
+    "question": "rotate right",
+    "answer": "{go2_turn_right}"
+  },
+  {
+    "question": "look right",
+    "answer": "{go2_turn_right}"
+  }
+]
