@@ -5,7 +5,7 @@ from speech_to_text.pipeline import SpeechToTextPipeline
 from qna_matcher import QnAMatcher
 
 
-WAKE_WORDS = ["go"]
+WAKE_WORDS = ["on"]
 
 
 class VoiceRobotAssistant:
