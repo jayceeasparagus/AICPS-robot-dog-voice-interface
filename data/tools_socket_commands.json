@@ -1,0 +1,18 @@
+[
+  {
+    "token": "{go2_stop}",
+    "command": "python3 board_command_sender.py stop"
+  },
+  {
+    "token": "{go2_stand}",
+    "command": "python3 board_command_sender.py stand"
+  },
+  {
+    "token": "{go2_sit}",
+    "command": "python3 board_command_sender.py sit"
+  },
+  {
+    "token": "{go2_stand_down}",
+    "command": "python3 board_command_sender.py stand_down"
+  }
+]

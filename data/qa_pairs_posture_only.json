@@ -1,0 +1,66 @@
+[
+  {
+    "question": "stop",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "freeze",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "halt",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "do not move",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "stop moving",
+    "answer": "{go2_stop}"
+  },
+  {
+    "question": "stand",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "stand up",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "get up",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "rise",
+    "answer": "{go2_stand}"
+  },
+  {
+    "question": "sit",
+    "answer": "{go2_sit}"
+  },
+  {
+    "question": "sit down",
+    "answer": "{go2_sit}"
+  },
+  {
+    "question": "take a seat",
+    "answer": "{go2_sit}"
+  },
+  {
+    "question": "stand down",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "lie down",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "lay down",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "rest",
+    "answer": "{go2_stand_down}"
+  }
+]
