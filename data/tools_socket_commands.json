@@ -14,5 +14,33 @@
   {
     "token": "{go2_stand_down}",
     "command": "python3 board_command_sender.py stand_down"
+  },
+  {
+    "token": "{go2_recover}",
+    "command": "python3 board_command_sender.py recover"
+  },
+  {
+    "token": "{go2_walk_forward}",
+    "command": "python3 board_command_sender.py walk_forward"
+  },
+  {
+    "token": "{go2_walk_backward}",
+    "command": "python3 board_command_sender.py walk_backward"
+  },
+  {
+    "token": "{go2_walk_left}",
+    "command": "python3 board_command_sender.py walk_left"
+  },
+  {
+    "token": "{go2_walk_right}",
+    "command": "python3 board_command_sender.py walk_right"
+  },
+  {
+    "token": "{go2_rotate_left}",
+    "command": "python3 board_command_sender.py rotate_left"
+  },
+  {
+    "token": "{go2_rotate_right}",
+    "command": "python3 board_command_sender.py rotate_right"
   }
 ]

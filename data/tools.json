@@ -1,26 +1,46 @@
 [
   {
     "token": "{go2_stop}",
-    "command": "echo GO2_ACTION_STOP"
+    "command": "python3 board_command_sender.py stop"
   },
   {
     "token": "{go2_stand}",
-    "command": "echo GO2_ACTION_STAND"
+    "command": "python3 board_command_sender.py stand"
   },
   {
     "token": "{go2_sit}",
-    "command": "echo GO2_ACTION_SIT"
+    "command": "python3 board_command_sender.py sit"
+  },
+  {
+    "token": "{go2_stand_down}",
+    "command": "python3 board_command_sender.py stand_down"
+  },
+  {
+    "token": "{go2_recover}",
+    "command": "python3 board_command_sender.py recover"
   },
   {
     "token": "{go2_walk_forward}",
-    "command": "echo GO2_ACTION_WALK_FORWARD"
+    "command": "python3 board_command_sender.py walk_forward"
   },
   {
-    "token": "{go2_turn_left}",
-    "command": "echo GO2_ACTION_TURN_LEFT"
+    "token": "{go2_walk_backward}",
+    "command": "python3 board_command_sender.py walk_backward"
   },
   {
-    "token": "{go2_turn_right}",
-    "command": "echo GO2_ACTION_TURN_RIGHT"
+    "token": "{go2_walk_left}",
+    "command": "python3 board_command_sender.py walk_left"
+  },
+  {
+    "token": "{go2_walk_right}",
+    "command": "python3 board_command_sender.py walk_right"
+  },
+  {
+    "token": "{go2_rotate_left}",
+    "command": "python3 board_command_sender.py rotate_left"
+  },
+  {
+    "token": "{go2_rotate_right}",
+    "command": "python3 board_command_sender.py rotate_right"
   }
 ]

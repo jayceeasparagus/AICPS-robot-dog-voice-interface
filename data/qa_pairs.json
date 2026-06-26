@@ -19,7 +19,6 @@
     "question": "do not move",
     "answer": "{go2_stop}"
   },
-
   {
     "question": "stand",
     "answer": "{go2_stand}"
@@ -33,10 +32,9 @@
     "answer": "{go2_stand}"
   },
   {
-    "question": "balance stand",
+    "question": "rise",
     "answer": "{go2_stand}"
   },
-
   {
     "question": "sit",
     "answer": "{go2_sit}"
@@ -49,7 +47,30 @@
     "question": "take a seat",
     "answer": "{go2_sit}"
   },
-
+  {
+    "question": "stand down",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "lie down",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "lay down",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "rest",
+    "answer": "{go2_stand_down}"
+  },
+  {
+    "question": "recover",
+    "answer": "{go2_recover}"
+  },
+  {
+    "question": "recovery stand",
+    "answer": "{go2_recover}"
+  },
   {
     "question": "walk forward",
     "answer": "{go2_walk_forward}"
@@ -70,30 +91,88 @@
     "question": "move ahead",
     "answer": "{go2_walk_forward}"
   },
-
+  {
+    "question": "walk backward",
+    "answer": "{go2_walk_backward}"
+  },
+  {
+    "question": "go backward",
+    "answer": "{go2_walk_backward}"
+  },
+  {
+    "question": "move backward",
+    "answer": "{go2_walk_backward}"
+  },
+  {
+    "question": "back up",
+    "answer": "{go2_walk_backward}"
+  },
+  {
+    "question": "reverse",
+    "answer": "{go2_walk_backward}"
+  },
+  {
+    "question": "walk left",
+    "answer": "{go2_walk_left}"
+  },
+  {
+    "question": "move left",
+    "answer": "{go2_walk_left}"
+  },
+  {
+    "question": "step left",
+    "answer": "{go2_walk_left}"
+  },
+  {
+    "question": "strafe left",
+    "answer": "{go2_walk_left}"
+  },
+  {
+    "question": "walk right",
+    "answer": "{go2_walk_right}"
+  },
+  {
+    "question": "move right",
+    "answer": "{go2_walk_right}"
+  },
+  {
+    "question": "step right",
+    "answer": "{go2_walk_right}"
+  },
+  {
+    "question": "strafe right",
+    "answer": "{go2_walk_right}"
+  },
   {
     "question": "turn left",
-    "answer": "{go2_turn_left}"
+    "answer": "{go2_rotate_left}"
   },
   {
     "question": "rotate left",
-    "answer": "{go2_turn_left}"
+    "answer": "{go2_rotate_left}"
   },
   {
     "question": "look left",
-    "answer": "{go2_turn_left}"
+    "answer": "{go2_rotate_left}"
   },
-
+  {
+    "question": "spin left",
+    "answer": "{go2_rotate_left}"
+  },
   {
     "question": "turn right",
-    "answer": "{go2_turn_right}"
+    "answer": "{go2_rotate_right}"
   },
   {
     "question": "rotate right",
-    "answer": "{go2_turn_right}"
+    "answer": "{go2_rotate_right}"
   },
   {
     "question": "look right",
-    "answer": "{go2_turn_right}"
+    "answer": "{go2_rotate_right}"
+  },
+  {
+    "question": "spin right",
+    "answer": "{go2_rotate_right}"
   }
 ]

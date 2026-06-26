@@ -15,6 +15,13 @@ TOKEN_TO_DOG_COMMAND = {
     "{go2_stand}": "stand",
     "{go2_sit}": "sit",
     "{go2_stand_down}": "stand_down",
+    "{go2_recover}": "recover",
+    "{go2_walk_forward}": "walk_forward",
+    "{go2_walk_backward}": "walk_backward",
+    "{go2_walk_left}": "walk_left",
+    "{go2_walk_right}": "walk_right",
+    "{go2_rotate_left}": "rotate_left",
+    "{go2_rotate_right}": "rotate_right",
 }
 
 
@@ -181,12 +188,20 @@ def main():
     print("  sit")
     print("  stand down")
     print("  stop")
+    print("  walk forward")
+    print("  walk backward")
+    print("  walk left")
+    print("  walk right")
+    print("  rotate left")
+    print("  rotate right")
     print()
     print("Examples:")
     print("  go stand up")
     print("  go sit")
     print("  go stand down")
     print("  go stop")
+    print("  go walk forward")
+    print("  go rotate left")
     print()
     print("Press Ctrl+C to stop.")
     print()

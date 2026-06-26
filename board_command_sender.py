@@ -13,6 +13,14 @@ VALID_COMMANDS = {
     "stand",
     "sit",
     "stand_down",
+    "recover",
+    "walk_forward",
+    "walk_backward",
+    "walk_left",
+    "walk_right",
+    "rotate_left",
+    "rotate_right",
+    "release",
 }
 
 
@@ -34,7 +42,7 @@ def send_command(command, host=DEFAULT_HOST, port=DEFAULT_PORT, timeout=TIMEOUT_
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Board-side sender for Go2 posture commands."
+        description="Board-side sender for Go2 voice commands."
     )
     parser.add_argument("command", choices=sorted(VALID_COMMANDS))
     parser.add_argument("--host", default=DEFAULT_HOST)

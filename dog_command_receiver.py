@@ -1,12 +1,13 @@
 import argparse
+from pathlib import Path
 import socket
-import sys
+import subprocess
 import traceback
 
 
 DEFAULT_HOST = "10.42.0.1"
 DEFAULT_PORT = 5005
-GO2_IFACE = "ethrobot"
+GO2_COMMAND_SCRIPT = Path(__file__).resolve().parent / "go2_test_cmd.py"
 
 VALID_COMMANDS = {
     "check",
@@ -14,67 +15,42 @@ VALID_COMMANDS = {
     "stand",
     "sit",
     "stand_down",
+    "recover",
+    "walk_forward",
+    "walk_backward",
+    "walk_left",
+    "walk_right",
+    "rotate_left",
+    "rotate_right",
+    "release",
 }
 
 
-def load_go2_client():
-    from unitree_sdk2py.core.channel import ChannelFactoryInitialize
-    from unitree_sdk2py.go2.sport.sport_client import SportClient
-
-    ChannelFactoryInitialize(0, GO2_IFACE)
-
-    client = SportClient()
-    client.SetTimeout(3.0)
-    client.Init()
-    return client
-
-
-def stop_motion(client):
-    try:
-        client.StopMove()
-    except Exception as exc:
-        print("Warning: StopMove failed:", exc)
-
-    try:
-        client.Move(0.0, 0.0, 0.0)
-    except Exception as exc:
-        print("Warning: zero Move failed:", exc)
-
-
-def run_command(client, command):
+def run_command(command):
     command = command.strip().lower()
 
     if command not in VALID_COMMANDS:
         return "ERROR invalid command: {}".format(command)
 
-    if command == "check":
-        print("Check command received.")
-        return "OK check"
+    print("Running Go2 command:", command)
+    result = subprocess.run(
+        ["python3", str(GO2_COMMAND_SCRIPT), command],
+        capture_output=True,
+        text=True,
+    )
 
-    if command == "stop":
-        print("Stop command received.")
-        stop_motion(client)
-        return "OK stop"
+    if result.stdout:
+        print(result.stdout, end="")
+    if result.stderr:
+        print(result.stderr, end="")
 
-    if command == "stand":
-        print("Stand command received.")
-        client.StandUp()
-        return "OK stand"
+    if result.returncode != 0:
+        return "ERROR {} returncode {}".format(command, result.returncode)
 
-    if command == "sit":
-        print("Sit command received.")
-        client.Sit()
-        return "OK sit"
-
-    if command == "stand_down":
-        print("Stand down command received.")
-        client.StandDown()
-        return "OK stand_down"
-
-    return "ERROR unreachable"
+    return "OK {}".format(command)
 
 
-def handle_connection(conn, addr, client):
+def handle_connection(conn, addr):
     try:
         data = conn.recv(1024)
         if not data:
@@ -83,7 +59,7 @@ def handle_connection(conn, addr, client):
         command = data.decode("utf-8", errors="replace").strip().lower()
         print("Received from {}: {}".format(addr, command))
 
-        response = run_command(client, command)
+        response = run_command(command)
         conn.sendall((response + "\n").encode("utf-8"))
 
     except Exception:
@@ -98,7 +74,7 @@ def handle_connection(conn, addr, client):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Dog-side TCP receiver for Go2 posture commands."
+        description="Dog-side TCP receiver for Go2 voice commands."
     )
     parser.add_argument("--host", default=DEFAULT_HOST)
     parser.add_argument("--port", type=int, default=DEFAULT_PORT)
@@ -109,18 +85,10 @@ def main():
     )
     args = parser.parse_args()
 
-    client = None
     if args.message_only:
         print("Message-only mode enabled. This will not move the dog.")
     else:
-        print("Initializing Go2 SportClient on {}.".format(GO2_IFACE))
-        try:
-            client = load_go2_client()
-        except Exception:
-            print("Failed to initialize Go2 client.")
-            traceback.print_exc()
-            sys.exit(1)
-        print("Go2 SportClient ready.")
+        print("Command mode enabled. Commands run through go2_test_cmd.py.")
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -136,12 +104,10 @@ def main():
             if args.message_only:
                 handle_message_only_connection(conn, addr)
             else:
-                handle_connection(conn, addr, client)
+                handle_connection(conn, addr)
     except KeyboardInterrupt:
         print("\nStopping command receiver.")
     finally:
-        if client is not None:
-            stop_motion(client)
         server.close()
 
 
