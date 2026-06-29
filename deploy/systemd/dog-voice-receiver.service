@@ -1,0 +1,14 @@
+[Unit]
+Description=Go2 Voice Command Receiver
+After=dog-wired-network.service
+Requires=dog-wired-network.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/unitree/voice_interface
+ExecStart=/usr/bin/python3 /home/unitree/voice_interface/dog_command_receiver.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

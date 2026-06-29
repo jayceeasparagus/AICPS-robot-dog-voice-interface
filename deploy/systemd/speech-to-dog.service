@@ -1,0 +1,14 @@
+[Unit]
+Description=Speech to Dog Voice Interface
+After=board-wired-network.service
+Requires=board-wired-network.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/aicps/robot-dog-voice-interface
+ExecStart=/home/aicps/robot-dog-voice-interface/.venv/bin/python -u /home/aicps/robot-dog-voice-interface/speech_to_dog.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

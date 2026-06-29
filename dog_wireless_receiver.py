@@ -4,34 +4,15 @@ import socket
 import subprocess
 import traceback
 
+from dog_command_protocol import VALID_COMMANDS, parse_command_message
+
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 5005
 GO2_COMMAND_SCRIPT = Path(__file__).resolve().parent / "go2_test_cmd.py"
 
-VALID_COMMANDS = {
-    "check",
-    "stop",
-    "stand",
-    "sit",
-    "stand_down",
-    "recover",
-    "walk_forward",
-    "walk_backward",
-    "walk_left",
-    "walk_right",
-    "rotate_left",
-    "rotate_right",
-    "release",
-}
-
 
 def run_command(command):
-    command = command.strip().lower()
-
-    if command not in VALID_COMMANDS:
-        return "ERROR invalid command: {}".format(command)
-
     print("Running Go2 command:", command)
     result = subprocess.run(
         ["python3", str(GO2_COMMAND_SCRIPT), command],
@@ -56,8 +37,10 @@ def handle_connection(conn, addr):
         if not data:
             return
 
-        command = data.decode("utf-8", errors="replace").strip().lower()
-        print("Received from {}: {}".format(addr, command))
+        text = data.decode("utf-8", errors="replace")
+        message = parse_command_message(text)
+        command = message["command"]
+        print("Received from {}: {}".format(addr, message))
 
         response = run_command(command)
         conn.sendall((response + "\n").encode("utf-8"))
@@ -78,8 +61,10 @@ def handle_message_only_connection(conn, addr):
         if not data:
             return
 
-        command = data.decode("utf-8", errors="replace").strip().lower()
-        print("Received from {}: {}".format(addr, command))
+        text = data.decode("utf-8", errors="replace")
+        message = parse_command_message(text)
+        command = message["command"]
+        print("Received from {}: {}".format(addr, message))
 
         if command in VALID_COMMANDS:
             response = "OK message_only {}".format(command)

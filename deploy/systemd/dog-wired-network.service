@@ -1,0 +1,12 @@
+[Unit]
+Description=Configure Go2 Jetson wired voice-board link
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/unitree/voice_interface
+ExecStart=/bin/sh /home/unitree/voice_interface/scripts/dog_set_wired_ip.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

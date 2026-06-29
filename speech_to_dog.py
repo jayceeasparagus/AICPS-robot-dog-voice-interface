@@ -5,6 +5,7 @@ import traceback
 
 from board_command_sender import send_command as send_wired_command
 from board_wireless_sender import send_command as send_wireless_command
+from doa_provider import get_doa_degrees
 from dog_connection_config import (
     COMMAND_TRANSPORT,
     DOG_COMMAND_PORT,
@@ -33,13 +34,19 @@ TOKEN_TO_DOG_COMMAND = {
 }
 
 
-def send_dog_command(command):
+def send_dog_command(command, confidence=None, phrase=None):
+    doa_deg = get_doa_degrees()
+
     if COMMAND_TRANSPORT == "wired":
         return send_wired_command(
             command,
             host=WIRED_DOG_HOST,
             port=DOG_COMMAND_PORT,
             timeout=DOG_COMMAND_TIMEOUT_S,
+            source="voice",
+            doa_deg=doa_deg,
+            confidence=confidence,
+            phrase=phrase,
         )
 
     if COMMAND_TRANSPORT == "wireless":
@@ -48,6 +55,10 @@ def send_dog_command(command):
             host=WIRELESS_DOG_HOST,
             port=DOG_COMMAND_PORT,
             timeout=DOG_COMMAND_TIMEOUT_S,
+            source="voice",
+            doa_deg=doa_deg,
+            confidence=confidence,
+            phrase=phrase,
         )
 
     raise ValueError("Unsupported COMMAND_TRANSPORT: {}".format(COMMAND_TRANSPORT))
@@ -149,7 +160,11 @@ class VoiceToDogAssistant:
                     continue
 
                 print("Sending dog command:", dog_command)
-                response = send_dog_command(dog_command)
+                response = send_dog_command(
+                    dog_command,
+                    confidence=match["score"],
+                    phrase=command_text,
+                )
                 print("Dog response:", response)
                 print("==============================\n")
 
