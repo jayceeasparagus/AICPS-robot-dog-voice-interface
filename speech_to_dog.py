@@ -3,7 +3,15 @@ import re
 import threading
 import traceback
 
-from board_command_sender import send_command
+from board_command_sender import send_command as send_wired_command
+from board_wireless_sender import send_command as send_wireless_command
+from dog_connection_config import (
+    COMMAND_TRANSPORT,
+    DOG_COMMAND_PORT,
+    DOG_COMMAND_TIMEOUT_S,
+    WIRED_DOG_HOST,
+    WIRELESS_DOG_HOST,
+)
 from qna_matcher import QnAMatcher
 from speech_to_text.pipeline import SpeechToTextPipeline
 
@@ -23,6 +31,26 @@ TOKEN_TO_DOG_COMMAND = {
     "{go2_rotate_left}": "rotate_left",
     "{go2_rotate_right}": "rotate_right",
 }
+
+
+def send_dog_command(command):
+    if COMMAND_TRANSPORT == "wired":
+        return send_wired_command(
+            command,
+            host=WIRED_DOG_HOST,
+            port=DOG_COMMAND_PORT,
+            timeout=DOG_COMMAND_TIMEOUT_S,
+        )
+
+    if COMMAND_TRANSPORT == "wireless":
+        return send_wireless_command(
+            command,
+            host=WIRELESS_DOG_HOST,
+            port=DOG_COMMAND_PORT,
+            timeout=DOG_COMMAND_TIMEOUT_S,
+        )
+
+    raise ValueError("Unsupported COMMAND_TRANSPORT: {}".format(COMMAND_TRANSPORT))
 
 
 class VoiceToDogAssistant:
@@ -121,7 +149,7 @@ class VoiceToDogAssistant:
                     continue
 
                 print("Sending dog command:", dog_command)
-                response = send_command(dog_command)
+                response = send_dog_command(dog_command)
                 print("Dog response:", response)
                 print("==============================\n")
 
@@ -182,6 +210,11 @@ def main():
 
     print("\nVoice-to-dog assistant running.")
     print("Wake words:", WAKE_WORDS)
+    print("Command transport:", COMMAND_TRANSPORT)
+    if COMMAND_TRANSPORT == "wireless":
+        print("Dog host:", WIRELESS_DOG_HOST)
+    elif COMMAND_TRANSPORT == "wired":
+        print("Dog host:", WIRED_DOG_HOST)
     print()
     print("Supported dog commands:")
     print("  stand")
