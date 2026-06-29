@@ -2,6 +2,7 @@ import json
 import subprocess
 import numpy as np
 import os
+import sys
 import traceback
 
 
@@ -18,7 +19,7 @@ def load_json(path):
 
 
 def get_embedding(text):
-    cmd = ["python3", "-m", "embeddings.minilm", text]
+    cmd = [sys.executable, "-m", "embeddings.minilm", text]
 
     result = subprocess.run(
         cmd,
