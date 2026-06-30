@@ -33,6 +33,24 @@ TOKEN_TO_DOG_COMMAND = {
     "{go2_rotate_right}": "rotate_right",
 }
 
+ASR_ALIAS_TO_DOG_COMMAND = {
+    "set": "sit",
+    "sit": "sit",
+    "sit down": "sit",
+    "set down": "sit",
+    "stand": "stand",
+    "stand up": "stand",
+    "standup": "stand",
+    "stop": "stop",
+    "stopped": "stop",
+    "stock": "stop",
+    "stand down": "stand_down",
+    "standdown": "stand_down",
+    "stay down": "stand_down",
+    "lay down": "stand_down",
+    "lie down": "stand_down",
+}
+
 
 def send_dog_command(command, confidence=None, phrase=None):
     doa_deg = get_doa_degrees()
@@ -143,26 +161,33 @@ class VoiceToDogAssistant:
                 print("\n==============================")
                 print("COMMAND TEXT:", command_text)
 
-                match = self.matcher.match(command_text)
-                self.latest_match = match
+                dog_command = ASR_ALIAS_TO_DOG_COMMAND.get(command_text)
+                confidence = 1.0
 
-                print("Best QnA question:", match["best_question"])
-                print("Similarity:", round(match["score"], 3))
-                print("Answer token:", match["answer"])
+                if dog_command is not None:
+                    print("Direct ASR alias matched:", command_text, "->", dog_command)
+                else:
+                    match = self.matcher.match(command_text)
+                    self.latest_match = match
 
-                if not match["matched"]:
-                    print("Rejected: command not confident enough.")
-                    continue
+                    print("Best QnA question:", match["best_question"])
+                    print("Similarity:", round(match["score"], 3))
+                    print("Answer token:", match["answer"])
 
-                dog_command = TOKEN_TO_DOG_COMMAND.get(match["answer"])
-                if dog_command is None:
-                    print("Rejected: unsupported dog command token:", match["answer"])
-                    continue
+                    if not match["matched"]:
+                        print("Rejected: command not confident enough.")
+                        continue
+
+                    dog_command = TOKEN_TO_DOG_COMMAND.get(match["answer"])
+                    confidence = match["score"]
+                    if dog_command is None:
+                        print("Rejected: unsupported dog command token:", match["answer"])
+                        continue
 
                 print("Sending dog command:", dog_command)
                 response = send_dog_command(
                     dog_command,
-                    confidence=match["score"],
+                    confidence=confidence,
                     phrase=command_text,
                 )
                 print("Dog response:", response)
